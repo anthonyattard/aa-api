@@ -31,4 +31,30 @@ module.exports = function(app) {
         });
 
   });
+
+  app.get('/surf/forecast/detailed', (req, res) => {
+    const spot_id = req.query.id;
+    // http://api.spitcast.com/api/spot/forecast/399/
+
+    var spit_cast_url = `http://api.spitcast.com/api/spot/forecast/${spot_id}`;
+
+    var options = {
+        uri: spit_cast_url,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    rp(options)
+        .then(function (data) {
+            console.log(data);
+            res.send(data);
+        })
+        .catch(function (err) {
+            // API call failed...
+        });
+
+  });
+
 }
