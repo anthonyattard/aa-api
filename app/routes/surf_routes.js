@@ -1,7 +1,7 @@
 module.exports = function(app) {
   var rp = require('request-promise');
 
-  app.get('/surf', (req, res) => {
+  app.get('/surf/forecast/:type', (req, res) => {
     const lat = req.query.lat;
     const long = req.query.long;
     const dist = req.query.dist;
